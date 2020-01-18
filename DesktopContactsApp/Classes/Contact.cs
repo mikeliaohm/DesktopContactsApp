@@ -15,5 +15,13 @@ namespace DesktopContactsApp.Classes
         public string Email { get; set; }
         public string Phone { get; set; }
 
+        /// <summary>
+        /// override default method and display Contact's properties
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Name} - {Email} - {Phone}";
+        }
     }
 }
