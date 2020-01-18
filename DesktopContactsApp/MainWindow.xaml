@@ -5,18 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopContactsApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="350">
+        Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel Margin="10">
-            <TextBox x:Name="nameTextBox"
-                     Margin="0,0,0,5"/>
-            <TextBox x:Name="emailTextBox"
-                     Margin="0,0,0,5"/>
-            <TextBox x:Name="phoneTextBox"
-                     Margin="0,0,0,5"/>
-            <Button Content="Save"
-                    x:Name="saveButton"
-                    Click="saveButton_Click"/>
+            <Button Content="New contact" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

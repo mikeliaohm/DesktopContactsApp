@@ -23,5 +23,11 @@ namespace DesktopContactsApp
         {
             InitializeComponent();
         }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Save contact and close the window
+            this.Close();
+        }
     }
 }

@@ -25,9 +25,10 @@ namespace DesktopContactsApp
             InitializeComponent();
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            NewContactWindow newContactWindow = new NewContactWindow();
+            newContactWindow.ShowDialog(); // new window must be closed before main window can be accessed
         }
     }
 }
