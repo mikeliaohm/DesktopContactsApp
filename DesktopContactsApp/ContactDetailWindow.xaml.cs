@@ -27,12 +27,26 @@ namespace DesktopContactsApp
         {
             InitializeComponent();
 
+            // init contact detail window and populate text boxes with property values
             this.contact = contact;
+            nameTextBox.Text = contact.Name;
+            emailTextBox.Text = contact.Email;
+            phoneTextBox.Text = contact.Phone;
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
+            // assign text inputs from user to contact instance
+            contact.Name = nameTextBox.Text;
+            contact.Email = emailTextBox.Text;
+            contact.Phone = phoneTextBox.Text;
 
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            {
+                connection.Update(contact);
+            }
+
+            this.Close();
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
