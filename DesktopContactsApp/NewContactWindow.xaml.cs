@@ -36,13 +36,9 @@ namespace DesktopContactsApp
                 Phone = phoneTextBox.Text
             };
 
-            string databaseName = "Contact.db";
-            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string databasePath = System.IO.Path.Combine(folderPath, databaseName);
-
             // using statement, connection instance will be disposed once runtime leaves this block
             // SQLLiteConnection implements IDisposable interface so the instance gets destroyed
-            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>(); // if table is created, this code will just be ignored
                 connection.Insert(contact); // Insert method will be able to find which table to insert the new record
