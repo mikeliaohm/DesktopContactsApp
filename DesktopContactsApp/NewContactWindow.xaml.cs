@@ -40,10 +40,13 @@ namespace DesktopContactsApp
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string databasePath = System.IO.Path.Combine(folderPath, databaseName);
 
-            SQLiteConnection connection = new SQLiteConnection(databasePath);
-            connection.CreateTable<Contact>(); // if table is created, this code will just be ignored
-            connection.Insert(contact); // Insert method will be able to find which table to insert the new record
-            connection.Close();
+            // using statement, connection instance will be disposed once runtime leaves this block
+            // SQLLiteConnection implements IDisposable interface so the instance gets destroyed
+            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            {
+                connection.CreateTable<Contact>(); // if table is created, this code will just be ignored
+                connection.Insert(contact); // Insert method will be able to find which table to insert the new record
+            }
 
             this.Close();
         }
