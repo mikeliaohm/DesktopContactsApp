@@ -88,5 +88,16 @@ namespace DesktopContactsApp
 
             contactListView.ItemsSource = filteredList;
         }
+
+        private void ContactListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Contact selectedContact = (Contact)contactListView.SelectedItem;
+
+            if (selectedContact != null)
+            {
+                ContactDetailWindow contactDetailWindow = new ContactDetailWindow(selectedContact);
+                contactDetailWindow.ShowDialog();
+            }
+        }
     }
 }
