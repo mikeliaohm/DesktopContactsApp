@@ -22,9 +22,12 @@ namespace DesktopContactsApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Contact> contacts;
         public MainWindow()
         {
             InitializeComponent();
+
+            contacts = new List<Contact>();
 
             ReadDatabase();
         }
@@ -39,11 +42,16 @@ namespace DesktopContactsApp
 
         private void ReadDatabase()
         {
-            List<Contact> contacts;
+            
             using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>();
-                contacts = connection.Table<Contact>().ToList();
+                contacts = (connection.Table<Contact>().ToList()).OrderBy(c => c.Name).ToList();
+
+                //define a sample Linq syntax
+                //var variable = from c2 in contacts
+                //               orderby c2.Name
+                //               select c2;
             }
 
             if (contacts != null)
@@ -59,6 +67,26 @@ namespace DesktopContactsApp
 
                 contactListView.ItemsSource = contacts;
             }
+        }
+
+        /// <summary>
+        /// search throgh contacts with search term input by user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox searchTextBox = sender as TextBox;
+
+            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(searchTextBox.Text.ToLower())).ToList();
+
+            // define Linq syntax that performs the same search function as filteredList
+            var filteredList2 = (from c2 in contacts
+                                where c2.Name.ToLower().Contains(searchTextBox.Text.ToLower())
+                                orderby c2.Email
+                                select c2).ToList();
+
+            contactListView.ItemsSource = filteredList;
         }
     }
 }
